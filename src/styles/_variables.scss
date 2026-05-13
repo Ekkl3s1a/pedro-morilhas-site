@@ -1,0 +1,99 @@
+// ─── Paleta ───────────────────────────────────────────────
+$color-primary:     #0F1724;   // charcoal (fundo escuro)
+$color-accent:      #FF5A3C;   // energy orange (CTA)
+$color-teal:        #00BFA6;   // suporte / badges
+$color-neutral-100: #F7F8FA;   // fundo claro
+$color-neutral-200: #E6E9EE;   // bordas / divisores
+$color-white:       #FFFFFF;
+$color-text-dark:   #0F1724;
+$color-text-muted:  #6B7280;
+
+// ─── Gradientes ───────────────────────────────────────────
+$gradient-hero: linear-gradient(
+  135deg,
+  rgba(15, 23, 36, 0.97) 0%,
+  rgba(26, 42, 58, 0.93) 100%
+);
+$gradient-cta: linear-gradient(90deg, #FF5A3C 0%, #ff7a5c 100%);
+$gradient-teal: linear-gradient(90deg, #00BFA6 0%, #00d4b8 100%);
+
+// ─── Sombras ──────────────────────────────────────────────
+$shadow-sm:     0 2px 8px  rgba(15, 23, 36, 0.08);
+$shadow-md:     0 4px 24px rgba(15, 23, 36, 0.12);
+$shadow-lg:     0 8px 40px rgba(15, 23, 36, 0.18);
+$shadow-accent: 0 8px 32px rgba(255, 90, 60, 0.30);
+$shadow-teal:   0 8px 32px rgba(0, 191, 166, 0.25);
+
+// ─── Tipografia ───────────────────────────────────────────
+$font-heading: 'Montserrat', sans-serif;
+$font-body:    'Inter', sans-serif;
+
+$font-size-xs:   0.75rem;   //  12px
+$font-size-sm:   0.875rem;  //  14px
+$font-size-base: 1rem;      //  16px
+$font-size-lg:   1.125rem;  //  18px
+$font-size-xl:   1.25rem;   //  20px
+$font-size-2xl:  1.5rem;    //  24px
+$font-size-3xl:  1.875rem;  //  30px
+$font-size-4xl:  2.25rem;   //  36px
+$font-size-5xl:  3rem;      //  48px
+$font-size-6xl:  3.75rem;   //  60px
+
+$font-weight-regular:   400;
+$font-weight-medium:    500;
+$font-weight-semibold:  600;
+$font-weight-bold:      700;
+$font-weight-extrabold: 800;
+$font-weight-black:     900;
+
+$line-height-tight:  1.2;
+$line-height-normal: 1.5;
+$line-height-loose:  1.75;
+
+// ─── Espaçamento (escala 4px) ─────────────────────────────
+$spacing-1:   0.25rem;   //  4px
+$spacing-2:   0.5rem;    //  8px
+$spacing-3:   0.75rem;   //  12px
+$spacing-4:   1rem;      //  16px
+$spacing-5:   1.25rem;   //  20px
+$spacing-6:   1.5rem;    //  24px
+$spacing-8:   2rem;      //  32px
+$spacing-10:  2.5rem;    //  40px
+$spacing-12:  3rem;      //  48px
+$spacing-16:  4rem;      //  64px
+$spacing-20:  5rem;      //  80px
+$spacing-24:  6rem;      //  96px
+$spacing-32:  8rem;      // 128px
+
+// ─── Layout ───────────────────────────────────────────────
+$container-max:    1200px;
+$container-narrow: 800px;
+$header-height:    72px;
+
+// ─── Breakpoints ──────────────────────────────────────────
+$bp-xs:  320px;
+$bp-sm:  480px;
+$bp-md:  768px;
+$bp-lg:  1024px;
+$bp-xl:  1280px;
+
+// ─── Bordas ───────────────────────────────────────────────
+$radius-sm:   4px;
+$radius-md:   8px;
+$radius-lg:   16px;
+$radius-xl:   24px;
+$radius-full: 9999px;
+
+// ─── Transições ───────────────────────────────────────────
+$transition-fast:   all 0.15s ease;
+$transition-base:   all 0.25s ease;
+$transition-slow:   all 0.4s ease;
+$transition-spring: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+// ─── Z-index ──────────────────────────────────────────────
+$z-base:    1;
+$z-card:    10;
+$z-sticky:  100;
+$z-header:  200;
+$z-modal:   300;
+$z-toast:   400;
