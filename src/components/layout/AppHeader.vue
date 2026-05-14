@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { NavLink } from '@/types'
 import { useUIStore } from '@/stores/ui.store'
 import BaseButton from '@/components/ui/BaseButton.vue'

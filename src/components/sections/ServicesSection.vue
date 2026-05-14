@@ -11,8 +11,8 @@ interface Props {
 
 defineProps<Props>()
 
-const { el: headerEl, isVisible: headerVisible } = useScrollReveal({ threshold: 0.2 })
-const { observe, isItemVisible }                 = useScrollRevealList({ threshold: 0.1 })
+const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.2 })
+const { observe, isItemVisible }   = useScrollRevealList({ threshold: 0.1 })
 
 const services: Service[] = [
   {

@@ -5,8 +5,8 @@ import { useScrollRevealList } from '@/composables/useScrollReveal'
 import type { Testimonial }    from '@/types'
 import BaseCard                from '@/components/ui/BaseCard.vue'
 
-const { el: headerEl, isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 })
-const { observe, isItemVisible }                 = useScrollRevealList({ threshold: 0.1 })
+const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 })
+const { observe, isItemVisible }   = useScrollRevealList({ threshold: 0.1 })
 
 const testimonials: Testimonial[] = [
   {

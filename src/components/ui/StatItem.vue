@@ -10,8 +10,8 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { el, isVisible } = useScrollReveal({ threshold: 0.3 })
-const { current }       = useCounterAnimation(props.stat.value, isVisible)
+const { isVisible } = useScrollReveal({ threshold: 0.3 })
+const { current }   = useCounterAnimation(props.stat.value, isVisible)
 </script>
 
 <template>

@@ -11,8 +11,8 @@ interface Props {
 
 defineProps<Props>()
 
-const { el: headerEl, isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 })
-const { el: listEl,   isVisible: listVisible }   = useScrollReveal({ threshold: 0.05 })
+const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 })
+const { isVisible: listVisible }   = useScrollReveal({ threshold: 0.05 })
 
 const openIndex = ref<number | null>(null)
 

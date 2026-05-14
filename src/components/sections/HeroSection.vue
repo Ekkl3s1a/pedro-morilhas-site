@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useScrollReveal } from '@/composables/useScrollReveal'
 import BaseButton from '@/components/ui/BaseButton.vue'
 
 interface Props {
@@ -26,7 +25,6 @@ onMounted(() => {
 })
 
 // Scroll reveal para os badges / stats inline
-const { el: badgeEl, isVisible: badgeVisible } = useScrollReveal({ threshold: 0.1 })
 
 const stats = [
   { value: '150+', label: 'Clientes'     },

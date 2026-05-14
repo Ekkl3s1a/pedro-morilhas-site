@@ -3,7 +3,7 @@ import { useScrollReveal }    from '@/composables/useScrollReveal'
 import type { Stat }          from '@/types'
 import StatItem               from '@/components/ui/StatItem.vue'
 
-const { el, isVisible } = useScrollReveal({ threshold: 0.2 })
+const { isVisible } = useScrollReveal({ threshold: 0.2 })
 
 const stats: Stat[] = [
   {

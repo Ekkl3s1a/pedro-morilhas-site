@@ -8,8 +8,8 @@ interface Props {
 
 defineProps<Props>()
 
-const { el: sectionEl, isVisible } = useScrollReveal({ threshold: 0.1 })
-const { el: imageEl,   isVisible: imageVisible } = useScrollReveal({ threshold: 0.2 })
+const { isVisible } = useScrollReveal({ threshold: 0.1 })
+const { isVisible: imageVisible } = useScrollReveal({ threshold: 0.2 })
 
 const values = [
   {
