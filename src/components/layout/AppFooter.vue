@@ -19,7 +19,7 @@ const navLinks = [
 ]
 
 const socials = [
-  { label: 'Instagram', icon: '📸', href: 'https://instagram.com/' },
+  { label: 'Instagram', icon: '📸', href: 'https://www.instagram.com/pt.pedromorilhas?igsh=MXFxdzh3YXB5YzNsaA==' },
   { label: 'YouTube',   icon: '▶️', href: 'https://youtube.com/'   },
   { label: 'LinkedIn',  icon: '💼', href: 'https://linkedin.com/'  },
 ]
@@ -80,7 +80,7 @@ function scrollTo(href: string) {
 
           <p class="footer__brand-bio">
             Transformo vidas através do treino personalizado,
-            nutrição e mentalidade. Baseado em Lisboa.
+            nutrição e mentalidade. Baseado em Barreiro.
           </p>
 
           <!-- Socials ────────────────────────────────── -->
@@ -126,19 +126,19 @@ function scrollTo(href: string) {
             <li class="footer__contact-item">
               <span aria-hidden="true">📧</span>
               <a
-                href="mailto:pedro@morilhas.pt"
+                href="mailto:pedroMorilhas--PersonalTrainer@hotmail.com"
                 class="footer__contact-link"
               >
-                pedro@morilhas.pt
+                 pedroMorilhas--PersonalTrainer@hotmail.com
               </a>
             </li>
             <li class="footer__contact-item">
               <span aria-hidden="true">📱</span>
               <a
-                href="tel:+351910000000"
+                href="tel:+351966810082"
                 class="footer__contact-link"
               >
-                +351 910 000 000
+                +351 966 810 082
               </a>
             </li>
           </ul>
@@ -163,7 +163,7 @@ function scrollTo(href: string) {
 </template>
 
 <style scoped lang="scss">
-@use 'sass:color';
+
 
 .footer {
   // ─── CTA Band ───────────────────────────────────────────

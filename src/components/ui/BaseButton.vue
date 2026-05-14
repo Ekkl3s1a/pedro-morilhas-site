@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import type { ButtonVariant, ButtonSize } from '@/types'
 
 interface Props {
@@ -74,7 +75,6 @@ const isLink = !!props.href
 </template>
 
 <style scoped lang="scss">
-@use 'sass:color';
 
 .btn {
   @include btn-base;

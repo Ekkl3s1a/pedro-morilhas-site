@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import type { Stat } from '@/types'
 import { useCounterAnimation } from '@/composables/useCounterAnimation'
 import { useScrollReveal }     from '@/composables/useScrollReveal'
@@ -29,6 +30,7 @@ const { current }       = useCounterAnimation(props.stat.value, isVisible)
 </template>
 
 <style scoped lang="scss">
+
 .stat-item {
   @include flex-col;
   align-items: center;

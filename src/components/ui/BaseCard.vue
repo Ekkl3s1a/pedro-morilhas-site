@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 interface Props {
   hover?:   boolean
   padding?: 'sm' | 'md' | 'lg'
@@ -33,6 +34,7 @@ withDefaults(defineProps<Props>(), {
 </template>
 
 <style scoped lang="scss">
+
 .card {
   @include card-base;
   position: relative;

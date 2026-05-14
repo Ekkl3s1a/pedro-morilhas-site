@@ -29,17 +29,21 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        // Injeta _variables e _mixins em todos os componentes automaticamente
+        // Injeta _variables, _mixins, e color module em todos os componentes automaticamente
         additionalData: `
-          @use "@/styles/_variables.scss" as *;
-          @use "@/styles/_mixins.scss" as *;
+          @use "sass:color";
+          @use "@/styles/variables.scss" as *;
+          @use "@/styles/mixins.scss" as *;
         `,
       },
     },
   },
 
   test: {
-    globals: true,
+    globals:     true,
     environment: 'jsdom',
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
   },
 })
