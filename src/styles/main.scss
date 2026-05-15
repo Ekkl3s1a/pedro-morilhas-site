@@ -2,6 +2,19 @@
 @use "reset";
 @use "animations";
 
+// ─── Scroll padding (compensa o header fixo nos anchors) ──
+html {
+  scroll-padding-top: $header-height;
+
+  @include mobile-only {
+    scroll-padding-top: $header-height-mobile;
+  }
+}
+
+body {
+  overflow-x: hidden;
+}
+
 // ─── Utilitários globais ──────────────────────────────────
 .container {
   @include container;
@@ -13,9 +26,13 @@
 
 .section__header {
   text-align: center;
-  margin-bottom: $spacing-12;
+  margin-bottom: $spacing-8;
 
   @include respond-to(md) {
+    margin-bottom: $spacing-12;
+  }
+
+  @include respond-to(lg) {
     margin-bottom: $spacing-16;
   }
 }
@@ -27,15 +44,15 @@
 .section__subtitle {
   @include body-text;
   color: $color-text-muted;
-  max-width: 560px;
+  max-width: 520px;
   margin-inline: auto;
-  margin-top: $spacing-4;
+  margin-top: $spacing-2;
 }
 
 .section__badge {
   display: inline-block;
   font-family: $font-heading;
-  font-size: $font-size-xs;
+  font-size: 10px;
   font-weight: $font-weight-bold;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -43,7 +60,12 @@
   background: rgba($color-accent, 0.1);
   padding: $spacing-1 $spacing-3;
   border-radius: $radius-full;
-  margin-bottom: $spacing-3;
+  margin-bottom: $spacing-2;
+
+  @include respond-to(md) {
+    font-size:     $font-size-xs;
+    margin-bottom: $spacing-3;
+  }
 }
 
 // ─── Highlight de texto ───────────────────────────────────

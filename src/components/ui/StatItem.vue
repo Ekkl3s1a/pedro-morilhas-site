@@ -35,7 +35,7 @@ const { current }   = useCounterAnimation(props.stat.value, isVisible)
   @include flex-col;
   align-items: center;
   text-align:  center;
-  gap:         $spacing-2;
+  gap:         $spacing-1;
 
   opacity:   0;
   transform: translateY(24px);
@@ -47,9 +47,13 @@ const { current }   = useCounterAnimation(props.stat.value, isVisible)
   }
 
   &__icon {
-    font-size:     2.5rem;
+    font-size:     1.8rem;
     line-height:   1;
-    margin-bottom: $spacing-1;
+    margin-bottom: 2px;
+
+    @include respond-to(md) {
+      font-size: 2.5rem;
+    }
   }
 
   &__number {
@@ -62,28 +66,36 @@ const { current }   = useCounterAnimation(props.stat.value, isVisible)
   }
 
   &__value {
-    font-size:   $font-size-5xl;
-    font-weight: $font-weight-black;
+    font-size:      clamp(2rem, 8vw, 3rem);
+    font-weight:    $font-weight-black;
     letter-spacing: -0.02em;
 
     @include respond-to(md) {
+      font-size: $font-size-5xl;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-6xl;
     }
   }
 
   &__suffix {
-    font-size:   $font-size-3xl;
+    font-size:   clamp(1.2rem, 4vw, 1.875rem);
     font-weight: $font-weight-bold;
     color:       $color-accent;
   }
 
   &__label {
-    font-family: $font-body;
-    font-size:   $font-size-sm;
-    font-weight: $font-weight-medium;
-    color:       rgba($color-white, 0.7);
+    font-family:    $font-body;
+    font-size:      9px;
+    font-weight:    $font-weight-medium;
+    color:          rgba($color-white, 0.7);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+
+    @include respond-to(md) {
+      font-size: $font-size-xs;
+    }
   }
 }
 </style>

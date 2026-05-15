@@ -16,7 +16,7 @@ const stats: Stat[] = [
   {
     id:     2,
     icon:   '📅',
-    value:  8,
+    value:  10,
     suffix: '+',
     label:  'Anos de Experiência',
   },
@@ -62,7 +62,7 @@ const stats: Stat[] = [
           Resultados que <span>falam por si</span>
         </h2>
         <p class="section__subtitle stats__subtitle">
-          Mais de 8 anos a transformar vidas. Estes números
+          Mais de 10 anos a transformar vidas. Estes números
           representam pessoas reais com resultados reais.
         </p>
       </div>
@@ -128,8 +128,8 @@ const stats: Stat[] = [
     filter:        blur(100px);
 
     &--1 {
-      width:      600px;
-      height:     600px;
+      width:      500px;
+      height:     500px;
       background: rgba($color-accent, 0.08);
       top:        -200px;
       right:      -200px;
@@ -158,7 +158,6 @@ const stats: Stat[] = [
 
   &__title {
     color: $color-white !important;
-
     span { color: $color-accent !important; }
   }
 
@@ -170,10 +169,10 @@ const stats: Stat[] = [
   &__grid {
     display:               grid;
     grid-template-columns: repeat(2, 1fr);
-    gap:                   $spacing-8;
+    gap:                   $spacing-6;
     position:              relative;
 
-    @include respond-to(md) {
+    @include respond-to(lg) {
       grid-template-columns: repeat(4, 1fr);
       gap: $spacing-4;
     }
@@ -187,7 +186,7 @@ const stats: Stat[] = [
   &__divider {
     display: none;
 
-    @include respond-to(md) {
+    @include respond-to(lg) {
       display:   block;
       position:  absolute;
       right:     0;
@@ -200,38 +199,42 @@ const stats: Stat[] = [
 
   // ─── Quote ────────────────────────────────────────────
   &__quote {
-    margin-top:    $spacing-16;
+    margin-top:    $spacing-10;
     text-align:    center;
-    padding-top:   $spacing-12;
+    padding-top:   $spacing-8;
     border-top:    1px solid rgba($color-white, 0.06);
 
     @include respond-to(md) {
-      margin-top: $spacing-20;
+      margin-top:  $spacing-16;
+      padding-top: $spacing-12;
     }
   }
 
   &__quote-text {
-    font-family:  $font-heading;
-    font-size:    $font-size-xl;
-    font-weight:  $font-weight-semibold;
-    color:        rgba($color-white, 0.85);
-    line-height:  $line-height-loose;
-    font-style:   italic;
-    max-width:    600px;
+    font-family:   $font-heading;
+    font-size:     $font-size-base;
+    font-weight:   $font-weight-semibold;
+    color:         rgba($color-white, 0.85);
+    line-height:   $line-height-loose;
+    font-style:    italic;
+    max-width:     600px;
     margin-inline: auto;
 
     @include respond-to(md) {
+      font-size: $font-size-xl;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-2xl;
     }
   }
 
   &__quote-author {
-    margin-top:  $spacing-4;
+    margin-top:  $spacing-3;
     font-family: $font-body;
-    font-size:   $font-size-sm;
+    font-size:   $font-size-xs;
     font-weight: $font-weight-medium;
     color:       $color-accent;
-    letter-spacing: 0.05em;
   }
 }
 </style>

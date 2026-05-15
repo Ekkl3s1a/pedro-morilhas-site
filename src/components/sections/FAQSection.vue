@@ -5,11 +5,17 @@ import { useScrollReveal } from '@/composables/useScrollReveal'
 import type { FAQItem }    from '@/types'
 import BaseButton          from '@/components/ui/BaseButton.vue'
 
+import { useWhatsApp } from '@/composables/useWhatsApp'
+
 interface Props {
   formUrl: string
 }
 
 defineProps<Props>()
+
+const { buildUrl } = useWhatsApp()
+
+const MSG_FAQ = 'Gostava de fazer uma pergunta sobre'
 
 const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 })
 const { isVisible: listVisible }   = useScrollReveal({ threshold: 0.05 })
@@ -97,7 +103,7 @@ const faqs: FAQItem[] = [
             label="Faz a tua pergunta"
             variant="primary"
             size="md"
-            :href="formUrl"
+            :href="buildUrl(MSG_FAQ)"
             :external="true"
           />
 
@@ -173,24 +179,23 @@ const faqs: FAQItem[] = [
   // ─── Layout ───────────────────────────────────────────
   &__layout {
     display: grid;
-    gap:     $spacing-12;
+    gap:     $spacing-8;
 
     @include respond-to(lg) {
-      grid-template-columns: 380px 1fr;
-      gap:          $spacing-20;
-      align-items:  start;
+      grid-template-columns: 320px 1fr;
+      gap:         $spacing-16;
+      align-items: start;
     }
   }
 
   // ─── Sidebar ──────────────────────────────────────────
   &__sidebar {
     @include flex-col;
-    gap:      $spacing-5;
-    position: relative;
+    gap: $spacing-4;
 
     @include respond-to(lg) {
       position: sticky;
-      top:      calc(#{$header-height} + #{$spacing-8});
+      top:      calc(#{$header-height} + #{$spacing-6});
     }
   }
 
@@ -201,10 +206,14 @@ const faqs: FAQItem[] = [
 
   &__subtitle {
     font-family: $font-body;
-    font-size:   $font-size-base;
+    font-size:   $font-size-xs;
     color:       $color-text-muted;
     line-height: $line-height-loose;
     max-width:   280px;
+
+    @include respond-to(md) {
+      font-size: $font-size-base;
+    }
   }
 
   // Decoração "?" gigante
@@ -223,7 +232,7 @@ const faqs: FAQItem[] = [
 
   &__deco-text {
     font-family:  $font-heading;
-    font-size:    12rem;
+    font-size:    10rem;
     font-weight:  $font-weight-black;
     color:        rgba($color-accent, 0.04);
     line-height:  1;
@@ -233,7 +242,7 @@ const faqs: FAQItem[] = [
   // ─── List ─────────────────────────────────────────────
   &__list {
     @include flex-col;
-    gap: $spacing-3;
+    gap: $spacing-2;
   }
 
   // ─── Item ─────────────────────────────────────────────
@@ -256,43 +265,51 @@ const faqs: FAQItem[] = [
 
   // ─── Question ─────────────────────────────────────────
   &__question {
-    width:           100%;
+    width:      100%;
     @include flex-between;
-    gap:             $spacing-4;
-    padding:         $spacing-5 $spacing-6;
-    text-align:      left;
-    cursor:          pointer;
-    background:      none;
-    border:          none;
-    transition:      $transition-base;
+    gap:        $spacing-3;
+    padding:    $spacing-4;
+    text-align: left;
+    cursor:     pointer;
+    background: none;
+    border:     none;
+    transition: $transition-base;
 
     &:hover {
-      background: rgba($color-accent, 0.03);
+      background: rgba($color-accent, 0.02);
+    }
+
+    @include respond-to(md) {
+      padding: $spacing-5 $spacing-6;
     }
   }
 
   &__question-text {
     font-family: $font-heading;
-    font-size:   $font-size-base;
+    font-size:   $font-size-xs;
     font-weight: $font-weight-semibold;
     color:       $color-text-dark;
     line-height: $line-height-tight;
     flex:        1;
 
     @include respond-to(md) {
+      font-size: $font-size-base;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-lg;
     }
   }
 
   // ─── Ícone +/- ────────────────────────────────────────
   &__icon {
-    width:          28px;
-    height:         28px;
+    width:          24px;
+    height:         24px;
     border-radius:  $radius-full;
     background:     $color-neutral-100;
     border:         1px solid $color-neutral-200;
     @include flex-center;
-    font-size:      $font-size-lg;
+    font-size:      $font-size-base;
     font-weight:    $font-weight-bold;
     color:          $color-text-muted;
     flex-shrink:    0;
@@ -305,22 +322,36 @@ const faqs: FAQItem[] = [
       color:        $color-white;
       transform:    rotate(45deg);
     }
+
+    @include respond-to(md) {
+      width:  28px;
+      height: 28px;
+    }
   }
 
   // ─── Answer ───────────────────────────────────────────
   &__answer {
-    padding:    0 $spacing-6 $spacing-5;
+    padding:    0 $spacing-4 $spacing-4;
     border-top: 1px solid $color-neutral-200;
+
+    @include respond-to(md) {
+      padding: 0 $spacing-6 $spacing-5;
+    }
   }
 
   &__answer-text {
-    font-family:  $font-body;
-    font-size:    $font-size-sm;
-    color:        $color-text-muted;
-    line-height:  $line-height-loose;
-    padding-top:  $spacing-4;
+    font-family: $font-body;
+    font-size:   $font-size-xs;
+    color:       $color-text-muted;
+    line-height: $line-height-loose;
+    padding-top: $spacing-3;
 
     @include respond-to(md) {
+      font-size:   $font-size-sm;
+      padding-top: $spacing-4;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-base;
     }
   }
@@ -330,7 +361,6 @@ const faqs: FAQItem[] = [
 .accordion-enter-active,
 .accordion-leave-active {
   transition:      opacity 0.28s ease, transform 0.28s ease;
-  overflow:        hidden;
 }
 
 .accordion-enter-from,

@@ -5,11 +5,16 @@ import type { Service }        from '@/types'
 import BaseButton              from '@/components/ui/BaseButton.vue'
 import BaseCard                from '@/components/ui/BaseCard.vue'
 
+import { useWhatsApp } from '@/composables/useWhatsApp'
+
 interface Props {
   formUrl: string
 }
 
 defineProps<Props>()
+
+const { buildUrl } = useWhatsApp()
+const MSG_GENERAL = 'Gostava de saber mais sobre os teus serviços.'
 
 const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.2 })
 const { observe, isItemVisible }   = useScrollRevealList({ threshold: 0.1 })
@@ -61,6 +66,10 @@ const services: Service[] = [
 
 function setRef(el: Element | null, index: number) {
   if (el instanceof HTMLElement) observe(index, el)
+}
+
+function msgService(title: string): string {
+  return `Gostava de saber mais sobre o teu serviço ${title}.`
 }
 </script>
 
@@ -140,7 +149,7 @@ function setRef(el: Element | null, index: number) {
 
             <!-- CTA inline ─────────────────────────── -->
             <a
-              :href="formUrl"
+              :href="buildUrl(msgService(service.title))"
               target="_blank"
               rel="noopener noreferrer"
               class="services__link"
@@ -163,7 +172,7 @@ function setRef(el: Element | null, index: number) {
           label="Fala Comigo Gratuitamente"
           variant="primary"
           size="lg"
-          :href="formUrl"
+          :href="buildUrl(MSG_GENERAL)"
           :external="true"
         />
       </div>
@@ -182,14 +191,16 @@ function setRef(el: Element | null, index: number) {
   &__grid {
     display:               grid;
     grid-template-columns: 1fr;
-    gap:                   $spacing-5;
+    gap:                   $spacing-3;
 
     @include respond-to(sm) {
       grid-template-columns: repeat(2, 1fr);
+      gap: $spacing-4;
     }
 
     @include respond-to(lg) {
       grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-5;
     }
   }
 
@@ -209,24 +220,34 @@ function setRef(el: Element | null, index: number) {
 
   // ─── Card ───────────────────────────────────────────────
   &__card {
-    height:         100%;
+    height:   100%;
     @include flex-col;
-    gap:            $spacing-4;
+    gap:      $spacing-3;
+
+    @include respond-to(md) {
+      gap: $spacing-4;
+    }
   }
 
   // ─── Ícone ──────────────────────────────────────────────
   &__icon {
-    width:         56px;
-    height:        56px;
-    border-radius: $radius-lg;
+    width:         44px;
+    height:        44px;
+    border-radius: $radius-md;
     background:    rgba($color-accent, 0.1);
     @include flex-center;
-    font-size:     1.8rem;
+    font-size:     1.4rem;
     flex-shrink:   0;
     transition:    $transition-base;
 
     &--highlight {
       background: rgba($color-white, 0.12);
+    }
+
+    @include respond-to(md) {
+      width:     56px;
+      height:    56px;
+      font-size: 1.8rem;
     }
   }
 
@@ -242,13 +263,13 @@ function setRef(el: Element | null, index: number) {
     gap:            $spacing-1;
     width:          fit-content;
     font-family:    $font-heading;
-    font-size:      $font-size-xs;
+    font-size:      10px;
     font-weight:    $font-weight-bold;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color:          $color-accent;
     background:     rgba($color-accent, 0.15);
-    padding:        $spacing-1 $spacing-3;
+    padding:        $spacing-1 $spacing-2;
     border-radius:  $radius-full;
   }
 
@@ -264,15 +285,17 @@ function setRef(el: Element | null, index: number) {
 
   // ─── Descrição ──────────────────────────────────────────
   &__desc {
-    font-family:  $font-body;
-    font-size:    $font-size-sm;
-    color:        $color-text-muted;
-    line-height:  $line-height-loose;
-    flex:         1; // empurra o link para o fundo do card
+    font-family: $font-body;
+    font-size:   $font-size-xs;
+    color:       $color-text-muted;
+    line-height: $line-height-loose;
+    flex:        1;
 
-    &--light {
-      color: rgba($color-white, 0.7);
+    @include respond-to(md) {
+      font-size: $font-size-sm;
     }
+
+    &--light { color: rgba($color-white, 0.7); }
   }
 
   // ─── Link inline ────────────────────────────────────────
@@ -281,7 +304,7 @@ function setRef(el: Element | null, index: number) {
     align-items:     center;
     gap:             $spacing-2;
     font-family:     $font-heading;
-    font-size:       $font-size-sm;
+    font-size:       $font-size-xs;
     font-weight:     $font-weight-bold;
     color:           $color-accent;
     text-decoration: none;
@@ -310,17 +333,21 @@ function setRef(el: Element | null, index: number) {
 
   // ─── Bottom CTA ─────────────────────────────────────────
   &__bottom {
-    margin-top:  $spacing-16;
+    margin-top:  $spacing-10;
     @include flex-col;
     align-items: center;
-    gap:         $spacing-5;
+    gap:         $spacing-4;
     text-align:  center;
   }
 
   &__bottom-text {
     font-family: $font-body;
-    font-size:   $font-size-lg;
+    font-size:   $font-size-sm;
     color:       $color-text-muted;
+
+    @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
   }
 }
 </style>

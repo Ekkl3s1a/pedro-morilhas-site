@@ -2,6 +2,7 @@
 import { onMounted, onUnmounted } from 'vue'
 import { useUIStore }           from '@/stores/ui.store'
 import { useActiveSection }     from '@/composables/useActiveSection'
+import { useSnapScroll }        from '@/composables/useSnapScroll'
 import AppHeader                from '@/components/layout/AppHeader.vue'
 import AppFooter                from '@/components/layout/AppFooter.vue'
 import HeroSection              from '@/components/sections/HeroSection.vue'
@@ -13,10 +14,30 @@ import FAQSection               from '@/components/sections/FAQSection.vue'
 import StickyBanner             from '@/components/ui/StickyBanner.vue'
 import CookieBanner             from '@/components/ui/CookieBanner.vue'
 
-const FORM_URL = 'https://forms.gle/EXEMPLO'
+const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdglTv_PWKJq7j1Y-aRTQ6IaoHbKX1t70DggsIgQAfuxCuRNA/viewform?usp=header'
+
+const SECTION_IDS = [
+  'hero',
+  'about',
+  'services',
+  'stats',
+  'testimonials',
+  'faq',
+]
 
 const ui = useUIStore()
-useActiveSection(['hero', 'about', 'services', 'stats', 'testimonials', 'faq'])
+useActiveSection(SECTION_IDS)
+
+// ── Snap scroll (só mobile) ──────────────────────────────
+const { } = useSnapScroll({
+  sectionIds:         SECTION_IDS,
+  threshold:          0.65,   // 65% visível → mais conservador
+  debounce:           320,    // mais tempo para parar
+  mobileBreakpoint:   768,
+  headerHeight:       60,
+  velocityThreshold:  8,      // ignora scrolls rápidos
+  snapCooldown:       900,    // 0.9s entre snaps
+})
 
 function handleScroll() {
   ui.updateScroll(window.scrollY)
@@ -64,4 +85,10 @@ main {
   // Espaço para o StickyBanner não cobrir o footer
   padding-bottom: 0;
 }
+
+// ── Previne scroll horizontal em mobile ─────────
+body {
+  overflow-x: hidden;
+}
+
 </style>

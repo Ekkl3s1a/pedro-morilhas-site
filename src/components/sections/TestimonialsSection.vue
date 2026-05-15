@@ -268,7 +268,6 @@ const avatarColors = [
 
 <style scoped lang="scss">
 
-
 .testimonials {
   background: $color-neutral-100;
 
@@ -279,20 +278,21 @@ const avatarColors = [
     @include respond-to(md) {
       display:               grid;
       grid-template-columns: repeat(2, 1fr);
-      gap:                   $spacing-5;
+      gap:                   $spacing-4;
     }
 
     @include respond-to(lg) {
       grid-template-columns: repeat(3, 1fr);
+      gap: $spacing-5;
     }
   }
 
   // ─── Card ─────────────────────────────────────────────
   &__card {
-    height:         100%;
+    height:   100%;
     @include flex-col;
-    gap:            $spacing-5;
-    transition:     $transition-base;
+    gap:      $spacing-4;
+    transition: $transition-base;
 
     &:hover {
       transform:  translateY(-4px);
@@ -322,13 +322,17 @@ const avatarColors = [
   }
 
   &__quote-text {
-    font-family:  $font-body;
-    font-size:    $font-size-sm;
-    color:        $color-text-muted;
-    line-height:  $line-height-loose;
-    font-style:   italic;
+    font-family: $font-body;
+    font-size:   $font-size-xs;
+    color:       $color-text-muted;
+    line-height: $line-height-loose;
+    font-style:  italic;
 
     @include respond-to(md) {
+      font-size: $font-size-sm;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-base;
     }
   }
@@ -338,22 +342,21 @@ const avatarColors = [
     display:     flex;
     align-items: center;
     gap:         $spacing-3;
-    padding-top: $spacing-4;
+    padding-top: $spacing-3;
     border-top:  1px solid $color-neutral-200;
     margin-top:  auto;
   }
 
   &__avatar {
-    width:         44px;
-    height:        44px;
+    width:         38px;
+    height:        38px;
     border-radius: $radius-full;
     @include flex-center;
     font-family:   $font-heading;
-    font-size:     $font-size-sm;
+    font-size:     $font-size-xs;
     font-weight:   $font-weight-bold;
     color:         $color-white;
     flex-shrink:   0;
-    letter-spacing: 0.02em;
   }
 
   &__author-info {
@@ -363,16 +366,24 @@ const avatarColors = [
 
   &__author-name {
     font-family: $font-heading;
-    font-size:   $font-size-sm;
+    font-size:   $font-size-xs;
     font-weight: $font-weight-bold;
     color:       $color-text-dark;
+
+    @include respond-to(md) {
+      font-size: $font-size-sm;
+    }
   }
 
   &__author-role {
     font-family: $font-body;
-    font-size:   $font-size-xs;
+    font-size:   9px;
     color:       $color-teal;
     font-weight: $font-weight-medium;
+
+    @include respond-to(md) {
+      font-size: $font-size-xs;
+    }
   }
 
   // ─── Carousel mobile ──────────────────────────────────
@@ -389,18 +400,18 @@ const avatarColors = [
     display:         flex;
     align-items:     center;
     justify-content: center;
-    gap:             $spacing-4;
-    margin-top:      $spacing-6;
+    gap:             $spacing-3;
+    margin-top:      $spacing-4;
   }
 
   &__ctrl {
-    width:         40px;
-    height:        40px;
+    width:         36px;
+    height:        36px;
     border-radius: $radius-full;
     background:    $color-white;
     border:        1px solid $color-neutral-200;
     @include flex-center;
-    font-size:     $font-size-lg;
+    font-size:     $font-size-base;
     cursor:        pointer;
     transition:    $transition-base;
     color:         $color-text-dark;
@@ -411,7 +422,6 @@ const avatarColors = [
       border-color: $color-accent;
       color:        $color-white;
       transform:    scale(1.08);
-      box-shadow:   $shadow-accent;
     }
   }
 
@@ -422,8 +432,8 @@ const avatarColors = [
   }
 
   &__dot {
-    width:         8px;
-    height:        8px;
+    width:         7px;
+    height:        7px;
     border-radius: $radius-full;
     background:    $color-neutral-200;
     border:        none;
@@ -433,11 +443,7 @@ const avatarColors = [
 
     &--active {
       background: $color-accent;
-      width:      24px;
-    }
-
-    &:hover:not(&--active) {
-      background: color.adjust($color-neutral-200, $lightness: -15%);
+      width:      20px;
     }
   }
 }
@@ -450,11 +456,11 @@ const avatarColors = [
 
 .slide-enter-from {
   opacity:   0;
-  transform: translateX(24px);
+  transform: translateX(20px);
 }
 
 .slide-leave-to {
   opacity:   0;
-  transform: translateX(-24px);
+  transform: translateX(-20px);
 }
 </style>

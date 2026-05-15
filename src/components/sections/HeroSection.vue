@@ -29,7 +29,7 @@ onMounted(() => {
 const stats = [
   { value: '150+', label: 'Clientes'     },
   { value: '5★',   label: 'Avaliação'    },
-  { value: '8+',   label: 'Anos de exp.' },
+  { value: '10+',   label: 'Anos de exp.' },
 ]
 </script>
 
@@ -64,7 +64,7 @@ const stats = [
         <!-- Badge de abertura ──────────────────────────── -->
         <div class="hero__badge" ref="badgeEl">
           <span class="hero__badge-dot" aria-hidden="true" />
-          Personal Trainer Certificado · Lisboa
+          Personal Trainer Certificado · Barreiro
         </div>
 
         <!-- Heading principal ──────────────────────────── -->
@@ -130,15 +130,6 @@ const stats = [
         </div>
       </div>
     </div>
-
-    <!-- Scroll indicator ───────────────────────────────── -->
-    <div class="hero__scroll" aria-hidden="true">
-      <span class="hero__scroll-label">Scroll</span>
-      <div class="hero__scroll-line">
-        <div class="hero__scroll-dot" />
-      </div>
-    </div>
-
   </section>
 </template>
 
@@ -151,7 +142,11 @@ const stats = [
   overflow:    hidden;
   @include flex-col;
   justify-content: center;
-  padding-top: $header-height;
+  padding-top: $header-height-mobile; // compensa o header fixo em mobile
+
+  @include respond-to(md) {
+    padding-top: $header-height;
+  }
 
   // --- Background -------------------------------------------
   &__bg {
@@ -176,32 +171,42 @@ const stats = [
     z-index:       2;
 
     &--1 {
-      width:      500px;
-      height:     500px;
+      width:      400px;
+      height:     400px;
       background: $color-accent;
-      top:        -100px;
-      right:      -100px;
+      top:        -80px;
+      right:      -80px;
       animation:  pulse 8s ease-in-out infinite;
+
+      @include respond-to(md) {
+        width: 500px;
+        height: 500px;
+      }
     }
 
     &--2 {
-      width:      400px;
-      height:     400px;
+      width:      300px;
+      height:     300px;
       background: $color-teal;
-      bottom:     -80px;
-      left:       -80px;
+      bottom:     -60px;
+      left:       -60px;
       animation:  pulse 10s ease-in-out infinite 2s;
     }
 
     &--3 {
-      width:      300px;
-      height:     300px;
-      background: $color-accent;
-      top:        50%;
-      left:       40%;
-      transform:  translate(-50%, -50%);
-      opacity:    0.08;
-      animation:  pulse 12s ease-in-out infinite 4s;
+      display: none;
+
+      @include respond-to(md) {
+        display:    block;
+        width:      300px;
+        height:     300px;
+        background: $color-accent;
+        top:        50%;
+        left:       40%;
+        transform:  translate(-50%, -50%);
+        opacity:    0.08;
+        animation:  pulse 12s ease-in-out infinite 4s;
+      }
     }
   }
 
@@ -223,13 +228,18 @@ const stats = [
 
   // --- Inner -----------------------------------------------
   &__inner {
-    position:        relative;
-    z-index:         4;
-    padding-block:   $spacing-20;
+    position:      relative;
+    z-index:       4;
+    padding-block: $spacing-8;
     @include flex-col;
-    gap:             $spacing-16;
+    gap:           $spacing-6;
 
     @include respond-to(md) {
+      padding-block: $spacing-16;
+      gap:           $spacing-10;
+    }
+
+    @include respond-to(lg) {
       padding-block: $spacing-24;
     }
   }
@@ -237,13 +247,16 @@ const stats = [
   // --- Content ---------------------------------------------
   &__content {
     @include flex-col;
-    gap:        $spacing-6;
-    max-width:  680px;
+    gap:       $spacing-4;
+    max-width: 680px;
 
-    // Estado inicial — invisível
     opacity:   0;
     transform: translateY(40px);
     transition: opacity 0.8s ease, transform 0.8s ease;
+
+    @include respond-to(md) {
+      gap: $spacing-6;
+    }
 
     &--loaded {
       opacity:   1;
@@ -258,22 +271,27 @@ const stats = [
     gap:            $spacing-2;
     width:          fit-content;
     font-family:    $font-heading;
-    font-size:      $font-size-xs;
+    font-size:      10px;
     font-weight:    $font-weight-bold;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color:          rgba($color-white, 0.85);
     background:     rgba($color-white, 0.08);
     border:         1px solid rgba($color-white, 0.12);
-    padding:        $spacing-2 $spacing-4;
+    padding:        $spacing-1 $spacing-3;
     border-radius:  $radius-full;
     backdrop-filter: blur(8px);
     animation:      fadeIn 0.6s ease 0.2s both;
+
+    @include respond-to(md) {
+      font-size: $font-size-xs;
+      padding:   $spacing-2 $spacing-4;
+    }
   }
 
   &__badge-dot {
-    width:         7px;
-    height:        7px;
+    width:         6px;
+    height:        6px;
     border-radius: $radius-full;
     background:    $color-teal;
     box-shadow:    0 0 0 3px rgba($color-teal, 0.3);
@@ -284,9 +302,13 @@ const stats = [
   // --- Title -----------------------------------------------
   &__title {
     @include heading-1;
-    color:          $color-white;
+    color:  $color-white;
     @include flex-col;
-    gap:            $spacing-1;
+    gap:    2px;
+
+    @include respond-to(md) {
+      gap: $spacing-1;
+    }
   }
 
   &__title-line {
@@ -310,21 +332,33 @@ const stats = [
   // --- Subtitle --------------------------------------------
   &__subtitle {
     @include body-text;
-    color:       rgba($color-white, 0.7);
-    max-width:   520px;
-    animation:   fadeInUp 0.7s ease 0.9s both;
+    color:     rgba($color-white, 0.7);
+    max-width: 520px;
+    animation: fadeInUp 0.7s ease 0.9s both;
   }
 
   // --- Actions ---------------------------------------------
   &__actions {
-    display:        flex;
-    flex-wrap:      wrap;
-    gap:            $spacing-3;
-    align-items:    center;
-    animation:      fadeInUp 0.7s ease 1.1s both;
+    display:     flex;
+    flex-wrap:   wrap;
+    gap:         $spacing-2;
+    align-items: center;
+    animation:   fadeInUp 0.7s ease 1.1s both;
+
+    @include mobile-only {
+      flex-direction: column;
+      align-items:    stretch;
+
+      // Botões a full width no mobile
+      :deep(.btn) {
+        width:          100%;
+        justify-content: center;
+      }
+    }
 
     @include respond-to(sm) {
       flex-direction: row;
+      gap:            $spacing-3;
     }
   }
 
@@ -332,8 +366,12 @@ const stats = [
   &__proof {
     display:     flex;
     align-items: center;
-    gap:         $spacing-3;
+    gap:         $spacing-2;
     animation:   fadeInUp 0.7s ease 1.3s both;
+
+    @include respond-to(md) {
+      gap: $spacing-3;
+    }
   }
 
   &__avatars {
@@ -342,27 +380,32 @@ const stats = [
   }
 
   &__avatar {
-    width:         36px;
-    height:        36px;
+    width:         28px;
+    height:        28px;
     border-radius: $radius-full;
-    border:        2.5px solid $color-primary;
-    background:    linear-gradient(
-                     135deg,
-                     color.adjust($color-accent, $lightness: -5%) 0%,
-                     color.adjust($color-teal, $lightness: 5%) 100%
-                   );
-    margin-left:   -10px;
+    border:        2px solid $color-primary;
+    background:    linear-gradient(135deg, $color-accent 0%, $color-teal 100%);
+    margin-left:   -8px;
     flex-shrink:   0;
-    box-shadow:    $shadow-sm;
 
     &:first-child { margin-left: 0; }
+
+    @include respond-to(md) {
+      width:      36px;
+      height:     36px;
+      margin-left: -10px;
+    }
   }
 
   &__proof-text {
     font-family: $font-body;
-    font-size:   $font-size-sm;
+    font-size:   $font-size-xs;
     color:       rgba($color-white, 0.65);
     line-height: $line-height-tight;
+
+    @include respond-to(md) {
+      font-size: $font-size-sm;
+    }
 
     strong {
       color:       $color-white;
@@ -374,12 +417,10 @@ const stats = [
   &__stats {
     display:               grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:                   $spacing-4;
-    padding-top:           $spacing-8;
+    gap:                   $spacing-2;
+    padding-top:           $spacing-4;
     border-top:            1px solid rgba($color-white, 0.08);
-    max-width:             480px;
 
-    // Estado inicial — invisível
     opacity:   0;
     transform: translateY(24px);
     transition: opacity 0.7s ease 1.5s, transform 0.7s ease 1.5s;
@@ -390,53 +431,63 @@ const stats = [
     }
 
     @include respond-to(md) {
-      max-width: 400px;
+      gap:         $spacing-4;
+      padding-top: $spacing-8;
+      max-width:   400px;
     }
   }
 
   &__stat {
     @include flex-col;
-    gap:    $spacing-1;
+    gap:     2px;
 
     animation-delay: calc(1.5s + var(--i) * 0.1s);
   }
 
   &__stat-value {
     font-family:    $font-heading;
-    font-size:      $font-size-2xl;
+    font-size:      $font-size-xl;
     font-weight:    $font-weight-black;
     color:          $color-white;
     letter-spacing: -0.02em;
     line-height:    1;
 
     @include respond-to(md) {
+      font-size: $font-size-2xl;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-3xl;
     }
   }
 
-  &__stat-label {
-    font-family: $font-body;
-    font-size:   $font-size-xs;
-    font-weight: $font-weight-medium;
-    color:       rgba($color-white, 0.5);
+   &__stat-label {
+    font-family:    $font-body;
+    font-size:      9px;
+    font-weight:    $font-weight-medium;
+    color:          rgba($color-white, 0.5);
     letter-spacing: 0.05em;
     text-transform: uppercase;
+
+    @include respond-to(md) {
+      font-size: $font-size-xs;
+    }
   }
 
   // --- Scroll indicator ------------------------------------
   &__scroll {
-    position:   absolute;
-    bottom:     $spacing-8;
-    left:       50%;
-    transform:  translateX(-50%);
-    z-index:    4;
+    position:    absolute;
+    bottom:      $spacing-6;
+    left:        50%;
+    transform:   translateX(-50%);
+    z-index:     4;
     @include flex-col;
     align-items: center;
     gap:         $spacing-2;
     animation:   fadeIn 1s ease 2s both;
 
-    @include respond-to(md) {
-      bottom: $spacing-10;
+    @include mobile-only {
+      display: none;
     }
   }
 
@@ -451,7 +502,7 @@ const stats = [
 
   &__scroll-line {
     width:         1px;
-    height:        48px;
+    height:        40px;
     background:    rgba($color-white, 0.12);
     border-radius: $radius-full;
     position:      relative;
@@ -464,7 +515,7 @@ const stats = [
     left:          50%;
     transform:     translateX(-50%);
     width:         3px;
-    height:        12px;
+    height:        10px;
     border-radius: $radius-full;
     background:    $color-accent;
     animation:     scrollDot 1.8s ease infinite;

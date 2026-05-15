@@ -182,12 +182,23 @@ const isActive = (href: string) =>
   // Estado inicial — transparente sobre o Hero
   background:      transparent;
 
+  @include mobile-only {
+    height: $header-height-mobile;
+  }
+
   // Após scroll — fundo escuro com blur
   &--scrolled {
-    background:     rgba($color-primary, 0.92);
+    background:     rgba($color-primary, 0.95);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow:     0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  // Menu aberto — fundo sempre sólido
+  &--menu-open {
+    background:      rgba($color-primary, 0.99);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 
   // ─── Inner ──────────────────────────────────────────────

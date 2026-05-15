@@ -180,12 +180,12 @@ const certifications = [
   // ─── Grid ───────────────────────────────────────────────
   &__grid {
     display:     grid;
-    gap:         $spacing-12;
+    gap:         $spacing-8;
     align-items: center;
 
     @include respond-to(lg) {
       grid-template-columns: 1fr 1fr;
-      gap: $spacing-20;
+      gap: $spacing-16;
     }
   }
 
@@ -201,11 +201,19 @@ const certifications = [
   &__image-frame {
     position:      relative;
     border-radius: $radius-xl;
-    overflow:      visible;
-    max-width:     440px;
+    max-width:     280px;      // compacto no mobile
     margin-inline: auto;
 
+    @include respond-to(sm) {
+      max-width: 320px;
+    }
+
+    @include respond-to(md) {
+      max-width: 380px;
+    }
+
     @include respond-to(lg) {
+      max-width: 440px;
       margin-inline: 0;
     }
   }
@@ -231,62 +239,62 @@ const certifications = [
 
   &__image-initials {
     font-family:  $font-heading;
-    font-size:    $font-size-6xl;
+    font-size:    clamp(3rem, 12vw, 6rem); // fluido
     font-weight:  $font-weight-black;
     color:        rgba($color-white, 0.12);
-    letter-spacing: -0.02em;
     user-select:  none;
   }
 
   // Decoração geométrica
   &__image-deco {
-    position:      absolute;
-    width:         80px;
-    height:        80px;
-    border-radius: $radius-lg;
-    z-index:       -1;
+    display: none;
 
-    &--tl {
-      top:        -16px;
-      left:       -16px;
-      background: $color-accent;
-      opacity:    0.6;
-    }
+    @include respond-to(md) {
+      display:       block;
+      position:      absolute;
+      width:         60px;
+      height:        60px;
+      border-radius: $radius-lg;
+      z-index:       -1;
 
-    &--br {
-      bottom:     -16px;
-      right:      -16px;
-      background: $color-teal;
-      opacity:    0.4;
+      &--tl {
+        top:        -12px;
+        left:       -12px;
+        background: $color-accent;
+        opacity:    0.6;
+      }
+
+      &--br {
+        bottom:     -12px;
+        right:      -12px;
+        background: $color-teal;
+        opacity:    0.4;
+      }
     }
   }
 
   // Badges flutuantes
   &__float-badge {
-    position:      absolute;
-    background:    $color-white;
-    border-radius: $radius-lg;
-    box-shadow:    $shadow-lg;
-    padding:       $spacing-3 $spacing-4;
-    display:       flex;
-    align-items:   center;
-    gap:           $spacing-3;
-    z-index:       $z-card;
+    display: none;
 
-    &--years {
-      bottom: $spacing-8;
-      left:   -$spacing-8;
+    @include respond-to(md) {
+      display:       flex;
+      position:      absolute;
+      background:    $color-white;
+      border-radius: $radius-lg;
+      box-shadow:    $shadow-lg;
+      padding:       $spacing-3 $spacing-4;
+      align-items:   center;
+      gap:           $spacing-3;
+      z-index:       $z-card;
 
-      @include respond-to(md) {
-        left: -$spacing-10;
+      &--years {
+        bottom: $spacing-8;
+        left:   -$spacing-8;
       }
-    }
 
-    &--clients {
-      top:   $spacing-8;
-      right: -$spacing-6;
-
-      @include respond-to(md) {
+      &--clients {
+        top:   $spacing-8;
         right: -$spacing-8;
       }
     }
@@ -316,21 +324,26 @@ const certifications = [
   &__content {
     order: 1;
     @include flex-col;
-    gap:   $spacing-5;
+    gap: $spacing-4;
 
     @include respond-to(lg) {
       order: 2;
+      gap:   $spacing-5;
     }
   }
 
   &__lead {
     font-family: $font-body;
-    font-size:   $font-size-lg;
+    font-size:   $font-size-sm;
     font-weight: $font-weight-medium;
     color:       $color-text-dark;
     line-height: $line-height-loose;
 
     @include respond-to(md) {
+      font-size: $font-size-lg;
+    }
+
+    @include respond-to(lg) {
       font-size: $font-size-xl;
     }
   }
@@ -342,20 +355,25 @@ const certifications = [
 
   // ─── Values ─────────────────────────────────────────────
   &__values {
-    @include flex-col;
-    gap:        $spacing-4;
-    margin-top: $spacing-2;
+    display:               grid;
+    grid-template-columns: 1fr 1fr;
+    gap:                   $spacing-3;
+
+    @include respond-to(md) {
+      grid-template-columns: 1fr;
+      gap:                   $spacing-4;
+    }
   }
 
   &__value {
-    display:     flex;
-    align-items: flex-start;
-    gap:         $spacing-4;
-    padding:     $spacing-4;
-    border-radius: $radius-lg;
-    border:      1px solid $color-neutral-200;
-    background:  $color-white;
-    transition:  $transition-base;
+    display:       flex;
+    align-items:   flex-start;
+    gap:           $spacing-2;
+    padding:       $spacing-3;
+    border-radius: $radius-md;
+    border:        1px solid $color-neutral-200;
+    background:    $color-white;
+    transition:    $transition-base;
 
     opacity:   0;
     transform: translateX(20px);
@@ -368,43 +386,59 @@ const certifications = [
     &:hover {
       border-color: $color-accent;
       box-shadow:   $shadow-sm;
-      transform:    translateX(4px);
+    }
+
+    @include respond-to(md) {
+      gap:     $spacing-4;
+      padding: $spacing-4;
     }
   }
 
   &__value-icon {
-    font-size:   1.6rem;
+    font-size:   1.2rem;
     line-height: 1;
     flex-shrink: 0;
-    margin-top:  2px;
+
+    @include respond-to(md) {
+      font-size: 1.6rem;
+    }
   }
 
   &__value-title {
-    font-family:  $font-heading;
-    font-size:    $font-size-base;
-    font-weight:  $font-weight-bold;
-    color:        $color-text-dark;
-    margin-bottom: $spacing-1;
+    font-family:   $font-heading;
+    font-size:     $font-size-xs;
+    font-weight:   $font-weight-bold;
+    color:         $color-text-dark;
+    margin-bottom: 2px;
+
+    @include respond-to(md) {
+      font-size:     $font-size-base;
+      margin-bottom: $spacing-1;
+    }
   }
 
   &__value-text {
     font-family: $font-body;
-    font-size:   $font-size-sm;
+    font-size:   $font-size-xs;
     color:       $color-text-muted;
-    line-height: $line-height-loose;
+    line-height: $line-height-normal;
+
+    @include respond-to(md) {
+      font-size:   $font-size-sm;
+      line-height: $line-height-loose;
+    }
   }
 
   // ─── Certifications ─────────────────────────────────────
   &__certs {
     border:        1px solid $color-neutral-200;
     border-radius: $radius-lg;
-    overflow:      hidden;
     background:    $color-white;
   }
 
   &__certs-summary {
     @include flex-between;
-    padding:     $spacing-4 $spacing-5;
+    padding:     $spacing-3 $spacing-4;
     cursor:      pointer;
     font-family: $font-heading;
     font-size:   $font-size-sm;
@@ -423,9 +457,8 @@ const certifications = [
   }
 
   &__certs-arrow {
-    transition:  transform 0.3s ease;
-    font-size:   $font-size-sm;
-    color:       $color-accent;
+    transition: transform 0.3s ease;
+    color:      $color-accent;
   }
 
   details[open] &__certs-arrow {
@@ -435,17 +468,21 @@ const certifications = [
   &__certs-list {
     @include flex-col;
     gap:        $spacing-2;
-    padding:    $spacing-4 $spacing-5;
+    padding:    $spacing-3 $spacing-4;
     border-top: 1px solid $color-neutral-200;
   }
 
   &__cert {
     display:     flex;
     align-items: center;
-    gap:         $spacing-3;
+    gap:         $spacing-2;
     font-family: $font-body;
-    font-size:   $font-size-sm;
+    font-size:   $font-size-xs;
     color:       $color-text-muted;
+
+    @include respond-to(md) {
+      font-size: $font-size-sm;
+    }
   }
 
   &__cert-icon {
@@ -456,10 +493,31 @@ const certifications = [
 
   // ─── Actions ────────────────────────────────────────────
   &__actions {
-    display:     flex;
-    flex-wrap:   wrap;
-    gap:         $spacing-3;
-    margin-top:  $spacing-2;
+    display:   flex;
+    flex-wrap: wrap;
+    gap:       $spacing-2;
+
+    @include mobile-only {
+      gap: $spacing-2;
+
+      // Botões side-by-side, dividem o espaço igualmente
+      :deep(.btn) {
+        flex:            1;
+        min-width:       0;
+        justify-content: center;
+        padding-inline:  $spacing-3;
+        font-size:       $font-size-xs;
+      }
+    }
+
+    @include respond-to(md) {
+      gap: $spacing-3;
+
+      :deep(.btn) {
+        flex:  none;
+        width: auto;
+      }
+    }
   }
 }
 </style>

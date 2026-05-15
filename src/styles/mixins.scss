@@ -9,6 +9,14 @@
   @else if $bp == xl  { @media (min-width: $bp-xl)  { @content; } }
 }
 
+@mixin mobile-only {
+  @media (max-width: #{$bp-md - 1px}) { @content; }
+}
+
+@mixin tablet-only {
+  @media (min-width: $bp-md) and (max-width: #{$bp-lg - 1px}) { @content; }
+}
+
 // ─── Flexbox helpers ──────────────────────────────────────
 @mixin flex-center {
   display: flex;
@@ -41,16 +49,16 @@
 
 // ─── Section padding ──────────────────────────────────────
 @mixin section-padding {
-  padding-block: $spacing-16;
+  padding-block: $spacing-mobile-section;
 
-  @include respond-to(md) { padding-block: $spacing-20; }
-  @include respond-to(lg) { padding-block: $spacing-24; }
+  @include respond-to(md) { padding-block: $spacing-16; }
+  @include respond-to(lg) { padding-block: $spacing-20; }
 }
 
 // ─── Tipografia ───────────────────────────────────────────
 @mixin heading-1 {
   font-family: $font-heading;
-  font-size: $font-size-4xl;
+  font-size: $font-size-mobile-h1;
   font-weight: $font-weight-black;
   line-height: $line-height-tight;
   letter-spacing: -0.02em;
@@ -61,30 +69,33 @@
 
 @mixin heading-2 {
   font-family: $font-heading;
-  font-size: $font-size-3xl;
+  font-size: $font-size-mobile-h2;
   font-weight: $font-weight-extrabold;
   line-height: $line-height-tight;
   letter-spacing: -0.015em;
 
-  @include respond-to(md) { font-size: $font-size-4xl; }
+  @include respond-to(md) { font-size: $font-size-3xl; }
+  @include respond-to(lg) { font-size: $font-size-4xl; }
 }
 
 @mixin heading-3 {
   font-family: $font-heading;
-  font-size: $font-size-xl;
+  font-size: $font-size-mobile-h3;
   font-weight: $font-weight-bold;
   line-height: $line-height-tight;
 
-  @include respond-to(md) { font-size: $font-size-2xl; }
+  @include respond-to(md) { font-size: $font-size-xl; }
+  @include respond-to(lg) { font-size: $font-size-2xl; }
 }
 
 @mixin body-text {
   font-family: $font-body;
-  font-size: $font-size-base;
+  font-size: $font-size-mobile-body;
   font-weight: $font-weight-regular;
   line-height: $line-height-loose;
 
-  @include respond-to(md) { font-size: $font-size-lg; }
+  @include respond-to(md) { font-size: $font-size-base; }
+  @include respond-to(lg) { font-size: $font-size-lg;   }
 }
 
 // ─── Botão base ───────────────────────────────────────────
@@ -93,17 +104,22 @@
   align-items: center;
   justify-content: center;
   gap: $spacing-2;
-  padding: $spacing-3 $spacing-6;
+  padding: $spacing-3 $spacing-5;
   border: none;
   border-radius: $radius-full;
   font-family: $font-heading;
   font-weight: $font-weight-bold;
-  font-size: $font-size-base;
+  font-size: $font-size-sm;
   text-decoration: none;
   cursor: pointer;
   transition: $transition-spring;
   white-space: nowrap;
   user-select: none;
+
+  @include respond-to(md) {
+    padding:   $spacing-3 $spacing-6;
+    font-size: $font-size-base;
+  }
 
   &:focus-visible {
     outline: 3px solid $color-accent;
@@ -119,9 +135,13 @@
 @mixin card-base {
   background: $color-white;
   border-radius: $radius-lg;
-  padding: $spacing-6;
+  padding: $spacing-4;
   box-shadow: $shadow-md;
   transition: $transition-base;
+
+  @include respond-to(md) {
+    padding: $spacing-6;
+  }
 
   &:hover {
     transform: translateY(-4px);
@@ -133,7 +153,7 @@
 @mixin section-title {
   @include heading-2;
   color: $color-text-dark;
-  margin-bottom: $spacing-4;
+  margin-bottom: $spacing-3;
 
   span {
     color: $color-accent;
@@ -159,4 +179,9 @@
   position: absolute;
   inset: 0;
   background: rgba($color, $opacity);
+}
+
+// ─── Safe area (notch do iPhone) ─────────────────────────
+@mixin safe-bottom {
+  padding-bottom: calc(#{$spacing-4} + env(safe-area-inset-bottom));
 }
