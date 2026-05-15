@@ -29,7 +29,7 @@ const ui = useUIStore()
 useActiveSection(SECTION_IDS)
 
 // ── Snap scroll (só mobile) ──────────────────────────────
-const { isSnapping } = useSnapScroll({
+const { } = useSnapScroll({
   sectionIds:         SECTION_IDS,
   threshold:          0.65,   // 65% visível → mais conservador
   debounce:           320,    // mais tempo para parar
