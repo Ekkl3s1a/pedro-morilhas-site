@@ -14,7 +14,7 @@ interface Props {
 defineProps<Props>()
 
 const { buildUrl } = useWhatsApp()
-const MSG_GENERAL = 'Gostava de saber mais sobre os teus serviços.'
+const MSG_GENERAL = 'Olá Pedro! Gostava de saber mais sobre os teus serviços.'
 
 const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.2 })
 const { observe, isItemVisible }   = useScrollRevealList({ threshold: 0.1 })
@@ -69,7 +69,7 @@ function setRef(el: Element | null, index: number) {
 }
 
 function msgService(title: string): string {
-  return `Gostava de saber mais sobre o teu serviço ${title}.`
+  return `Olá Pedro! Gostava de saber mais sobre o teu serviço ${title}.`
 }
 </script>
 

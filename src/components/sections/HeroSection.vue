@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import { useWhatsApp } from '@/composables/useWhatsApp'
 
 interface Props {
   formUrl: string
@@ -13,6 +14,10 @@ const isLoaded  = ref(false)
 
 // Parallax subtil no scroll
 const parallaxY = ref(0)
+
+const { buildUrl } = useWhatsApp()
+
+const MSG_HERO = 'Olá Pedro! Gostava de saber mais sobre o teu trabalho.'
 
 function handleScroll() {
   parallaxY.value = window.scrollY * 0.35
@@ -85,17 +90,18 @@ const stats = [
         <!-- CTAs ───────────────────────────────────────── -->
         <div class="hero__actions">
           <BaseButton
-            label="Quero Começar Agora"
+            label="Quero Começar"
             variant="primary"
             size="lg"
-            :href="formUrl"
+            :href="buildUrl(MSG_HERO)"
             :external="true"
           />
           <BaseButton
-            label="Ver Serviços"
-            variant="ghost"
+            label="Avaliação Física Inicial"
+            variant="white"
             size="lg"
-            href="#services"
+            :href="formUrl"
+            :external="true"
           />
         </div>
 

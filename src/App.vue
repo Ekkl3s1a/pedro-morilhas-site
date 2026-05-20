@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
+import { onMounted, onUnmounted, computed } from 'vue'
 import { useUIStore }           from '@/stores/ui.store'
 import { useActiveSection }     from '@/composables/useActiveSection'
 import { useSnapScroll }        from '@/composables/useSnapScroll'
@@ -13,6 +13,8 @@ import TestimonialsSection      from '@/components/sections/TestimonialsSection.
 import FAQSection               from '@/components/sections/FAQSection.vue'
 import StickyBanner             from '@/components/ui/StickyBanner.vue'
 import CookieBanner             from '@/components/ui/CookieBanner.vue'
+import WhatsAppButton           from '@/components/ui/WhatsAppButton.vue'
+import SchemaOrg                from '@/components/SchemaOrg.vue'
 
 const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdglTv_PWKJq7j1Y-aRTQ6IaoHbKX1t70DggsIgQAfuxCuRNA/viewform?usp=header'
 
@@ -29,7 +31,7 @@ const ui = useUIStore()
 useActiveSection(SECTION_IDS)
 
 // ── Snap scroll (só mobile) ──────────────────────────────
-const { } = useSnapScroll({
+const { isSnapping } = useSnapScroll({
   sectionIds:         SECTION_IDS,
   threshold:          0.65,   // 65% visível → mais conservador
   debounce:           320,    // mais tempo para parar
@@ -38,6 +40,8 @@ const { } = useSnapScroll({
   velocityThreshold:  8,      // ignora scrolls rápidos
   snapCooldown:       900,    // 0.9s entre snaps
 })
+
+const showSnapHint = computed(() => isSnapping.value)
 
 function handleScroll() {
   ui.updateScroll(window.scrollY)
@@ -55,6 +59,8 @@ onUnmounted(() => {
 
 <template>
   <div id="app">
+    <SchemaOrg />
+
     <AppHeader :form-url="FORM_URL" />
 
     <main id="main-content" role="main">
@@ -71,6 +77,14 @@ onUnmounted(() => {
     <!-- Banners globais ──────────────────────────── -->
     <StickyBanner :form-url="FORM_URL" />
     <CookieBanner />
+    <WhatsAppButton />
+
+    <!-- Snap indicator ───────────────────────────── -->
+    <div
+      class="snap-hint"
+      :class="{ 'snap-hint--active': showSnapHint }"
+      aria-hidden="true"
+    ></div>
   </div>
 </template>
 

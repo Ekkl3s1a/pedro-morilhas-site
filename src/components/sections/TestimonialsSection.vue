@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, computed }       from 'vue'
-import { useScrollReveal }     from '@/composables/useScrollReveal'
-import { useScrollRevealList } from '@/composables/useScrollReveal'
-import type { Testimonial }    from '@/types'
-import BaseCard                from '@/components/ui/BaseCard.vue'
+import { ref, computed, onMounted }   from 'vue'
+import { useScrollReveal }            from '@/composables/useScrollReveal'
+import { useScrollRevealList }        from '@/composables/useScrollReveal'
+import { useSwipe }                   from '@/composables/useSwipe'
+import type { Testimonial }           from '@/types'
+import BaseCard                       from '@/components/ui/BaseCard.vue'
 
 const { isVisible: headerVisible } = useScrollReveal({ threshold: 0.1 })
 const { observe, isItemVisible }   = useScrollRevealList({ threshold: 0.1 })
@@ -58,6 +59,19 @@ const testimonials: Testimonial[] = [
     initials: 'JC',
   },
 ]
+
+// ── Swipe ────────────────────────────────────────────────
+const carouselEl = ref<HTMLElement | null>(null)
+
+const { attach } = useSwipe({
+  threshold:    50,
+  onSwipeLeft:  () => next(),
+  onSwipeRight: () => prev(),
+})
+
+onMounted(() => {
+  if (carouselEl.value) attach(carouselEl.value)
+})
 
 // Carousel mobile
 const activeIndex  = ref(0)
@@ -176,6 +190,7 @@ const avatarColors = [
 
       <!-- Carousel mobile ─────────────────────────────── -->
       <div
+        ref="carouselEl"
         class="testimonials__carousel"
         role="region"
         aria-label="Carousel de testemunhos"
@@ -445,6 +460,16 @@ const avatarColors = [
       background: $color-accent;
       width:      20px;
     }
+  }
+
+  &__swipe-hint {
+    text-align:     center;
+    font-family:    $font-body;
+    font-size:      $font-size-xs;
+    color:          $color-text-muted;
+    margin-top:     $spacing-3;
+    opacity:        0.6;
+    letter-spacing: 0.05em;
   }
 }
 
