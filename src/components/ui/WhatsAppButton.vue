@@ -104,9 +104,9 @@ function dismissTooltip() {
     display: none;
   }
 
-  // Sobe quando o StickyBanner está visível
+  // Esconde no mobile — o BottomNav já tem o botão WhatsApp
   @include mobile-only {
-    bottom: calc(#{$spacing-6} + 56px);
+    display: none;
   }
 
   @include respond-to(md) {

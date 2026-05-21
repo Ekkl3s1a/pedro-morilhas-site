@@ -11,9 +11,13 @@ import ServicesSection          from '@/components/sections/ServicesSection.vue'
 import StatsSection             from '@/components/sections/StatsSection.vue'
 import TestimonialsSection      from '@/components/sections/TestimonialsSection.vue'
 import FAQSection               from '@/components/sections/FAQSection.vue'
+import CalculatorSection        from '@/components/sections/CalculatorSection.vue'
+import BeforeAfterSection       from '@/components/sections/BeforeAfterSection.vue'
 import StickyBanner             from '@/components/ui/StickyBanner.vue'
 import CookieBanner             from '@/components/ui/CookieBanner.vue'
 import WhatsAppButton           from '@/components/ui/WhatsAppButton.vue'
+import ScrollProgressBar        from '@/components/ui/ScrollProgressBar.vue'
+import BottomNav                from '@/components/layout/BottomNav.vue'
 import SchemaOrg                from '@/components/SchemaOrg.vue'
 
 const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdglTv_PWKJq7j1Y-aRTQ6IaoHbKX1t70DggsIgQAfuxCuRNA/viewform?usp=header'
@@ -22,6 +26,8 @@ const SECTION_IDS = [
   'hero',
   'about',
   'services',
+  'calculator',
+  'results',
   'stats',
   'testimonials',
   'faq',
@@ -60,13 +66,15 @@ onUnmounted(() => {
 <template>
   <div id="app">
     <SchemaOrg />
-
+    <ScrollProgressBar />
     <AppHeader :form-url="FORM_URL" />
 
     <main id="main-content" role="main">
       <HeroSection          :form-url="FORM_URL" />
       <AboutSection         :form-url="FORM_URL" />
       <ServicesSection      :form-url="FORM_URL" />
+      <CalculatorSection    :form-url="FORM_URL" />
+      <BeforeAfterSection   :form-url="FORM_URL" />
       <StatsSection />
       <TestimonialsSection />
       <FAQSection           :form-url="FORM_URL" />
@@ -78,6 +86,7 @@ onUnmounted(() => {
     <StickyBanner :form-url="FORM_URL" />
     <CookieBanner />
     <WhatsAppButton />
+    <BottomNav />
 
     <!-- Snap indicator ───────────────────────────── -->
     <div
@@ -96,8 +105,10 @@ onUnmounted(() => {
 
 main {
   flex: 1;
-  // Espaço para o StickyBanner não cobrir o footer
-  padding-bottom: 0;
+
+  @include mobile-only {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom));
+  }
 }
 
 // ── Previne scroll horizontal em mobile ─────────
