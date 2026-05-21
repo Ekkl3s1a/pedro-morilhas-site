@@ -107,16 +107,16 @@ function navigate(item: NavItem) {
   bottom:   0;
   left:     0;
   right:    0;
-  z-index:  $z-header;
+  z-index:  $z-sticky;
 
   // Safe area para iPhone com home indicator
   padding-bottom: env(safe-area-inset-bottom);
 
-  background:      rgba($color-primary, 0.97);
+  background:      rgba($color-primary, 0.98);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top:      1px solid rgba($color-white, 0.07);
-  box-shadow:      0 -4px 24px rgba(15, 23, 36, 0.3);
+  box-shadow:      0 -2px 16px rgba(15, 23, 36, 0.25);
 
   @include mobile-only {
     display: block;

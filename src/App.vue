@@ -13,6 +13,7 @@ import TestimonialsSection      from '@/components/sections/TestimonialsSection.
 import FAQSection               from '@/components/sections/FAQSection.vue'
 import CalculatorSection        from '@/components/sections/CalculatorSection.vue'
 import BeforeAfterSection       from '@/components/sections/BeforeAfterSection.vue'
+import BookingSection from '@/components/sections/BookingSection.vue'
 import StickyBanner             from '@/components/ui/StickyBanner.vue'
 import CookieBanner             from '@/components/ui/CookieBanner.vue'
 import WhatsAppButton           from '@/components/ui/WhatsAppButton.vue'
@@ -20,6 +21,7 @@ import ScrollProgressBar        from '@/components/ui/ScrollProgressBar.vue'
 import BottomNav                from '@/components/layout/BottomNav.vue'
 import SchemaOrg                from '@/components/SchemaOrg.vue'
 
+const CALENDLY_URL = 'https://calendly.com/pedro-morilhas/consulta-gratuita'
 const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdglTv_PWKJq7j1Y-aRTQ6IaoHbKX1t70DggsIgQAfuxCuRNA/viewform?usp=header'
 
 const SECTION_IDS = [
@@ -31,6 +33,7 @@ const SECTION_IDS = [
   'stats',
   'testimonials',
   'faq',
+  'booking',
 ]
 
 const ui = useUIStore()
@@ -70,7 +73,10 @@ onUnmounted(() => {
     <AppHeader :form-url="FORM_URL" />
 
     <main id="main-content" role="main">
-      <HeroSection          :form-url="FORM_URL" />
+      <HeroSection
+        :form-url="FORM_URL"
+        :calendly-url="CALENDLY_URL"
+      />
       <AboutSection         :form-url="FORM_URL" />
       <ServicesSection      :form-url="FORM_URL" />
       <CalculatorSection    :form-url="FORM_URL" />
@@ -78,6 +84,10 @@ onUnmounted(() => {
       <StatsSection />
       <TestimonialsSection />
       <FAQSection           :form-url="FORM_URL" />
+      <BookingSection
+        :calendly-url="CALENDLY_URL"
+        :form-url="FORM_URL"
+      />
     </main>
 
     <AppFooter   :form-url="FORM_URL" />
@@ -105,10 +115,6 @@ onUnmounted(() => {
 
 main {
   flex: 1;
-
-  @include mobile-only {
-    padding-bottom: calc(60px + env(safe-area-inset-bottom));
-  }
 }
 
 // ── Previne scroll horizontal em mobile ─────────

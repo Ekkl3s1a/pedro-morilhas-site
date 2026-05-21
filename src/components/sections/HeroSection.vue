@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import BaseButton from '@/components/ui/BaseButton.vue'
+import CalendlyButton from '@/components/ui/CalendlyButton.vue'
 import { useWhatsApp } from '@/composables/useWhatsApp'
 
 interface Props {
-  formUrl: string
+  formUrl: string,
+  calendlyUrl: string
 }
 
 defineProps<Props>()
@@ -89,12 +91,11 @@ const stats = [
 
         <!-- CTAs ───────────────────────────────────────── -->
         <div class="hero__actions">
-          <BaseButton
-            label="Quero Começar"
+          <CalendlyButton
+            :calendly-url="calendlyUrl"
+            label="Marcar Consulta Grátis"
             variant="primary"
             size="lg"
-            :href="buildUrl(MSG_HERO)"
-            :external="true"
           />
           <BaseButton
             label="Avaliação Física Inicial"

@@ -28,7 +28,7 @@ function scrollTo(href: string) {
   const target = document.querySelector(href)
   if (!target) return
 
-  const offset = 80
+  const offset = 60
   const top    = target.getBoundingClientRect().top + window.scrollY - offset
   window.scrollTo({ top, behavior: 'smooth' })
 }
@@ -99,51 +99,54 @@ function scrollTo(href: string) {
           </div>
         </div>
 
-        <!-- Coluna 2 — Links ───────────────────────────── -->
-        <nav class="footer__nav" aria-label="Navegação do rodapé">
-          <h3 class="footer__nav-title">Navegação</h3>
-          <ul class="footer__nav-list" role="list">
-            <li v-for="link in navLinks" :key="link.href">
-              <a
-                :href="link.href"
-                class="footer__nav-link"
-                @click.prevent="scrollTo(link.href)"
-              >
-                {{ link.label }}
-              </a>
-            </li>
-          </ul>
-        </nav>
+        <!-- Nav + Contacto (lado a lado no mobile) ──────── -->
+        <div class="footer__cols">
+          <!-- Navegação ─────────────────────────────────── -->
+          <nav class="footer__nav" aria-label="Navegação do rodapé">
+            <h3 class="footer__nav-title">Navegação</h3>
+            <ul class="footer__nav-list" role="list">
+              <li v-for="link in navLinks" :key="link.href">
+                <a
+                  :href="link.href"
+                  class="footer__nav-link"
+                  @click.prevent="scrollTo(link.href)"
+                >
+                  {{ link.label }}
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-        <!-- Coluna 3 — Contacto ────────────────────────── -->
-        <div class="footer__contact">
-          <h3 class="footer__nav-title">Contacto</h3>
-          <ul class="footer__contact-list" role="list">
-            <li class="footer__contact-item">
-              <span aria-hidden="true">📍</span>
-              <span>Barreiro, Portugal</span>
-            </li>
-            <li class="footer__contact-item">
-              <span aria-hidden="true">📧</span>
-              <a
-                href="mailto:pedroMorilhas--PersonalTrainer@hotmail.com"
-                class="footer__contact-link"
-              >
-                 pedroMorilhas--PersonalTrainer@hotmail.com
-              </a>
-            </li>
-            <li class="footer__contact-item">
-              <span aria-hidden="true">📱</span>
-              <a
-                href="tel:+351966810082"
-                class="footer__contact-link"
-              >
-                +351 966 810 082
-              </a>
-            </li>
-          </ul>
+          <!-- Contacto ──────────────────────────────────── -->
+          <div class="footer__contact">
+            <h3 class="footer__nav-title">Contacto</h3>
+            <ul class="footer__contact-list" role="list">
+              <li class="footer__contact-item">
+                <span aria-hidden="true">📍</span>
+                <span>Barreiro, Portugal</span>
+              </li>
+              <li class="footer__contact-item">
+                <span aria-hidden="true">📧</span>
+                <a
+                  href="mailto:pedromorilhas--personaltrainer@hotmail.com"
+                  class="footer__contact-link"
+                >
+                  pedromorilhas--personaltrainer@hotmail.com
+                </a>
+              </li>
+              <li class="footer__contact-item">
+                <span aria-hidden="true">📱</span>
+                <a
+                  href="tel:+351966810082"
+                  class="footer__contact-link"
+                >
+                  +351 966 810 082
+                </a>
+              </li>
+            </ul>
+          </div>
+
         </div>
-
       </div>
     </div>
 
@@ -163,17 +166,16 @@ function scrollTo(href: string) {
 </template>
 
 <style scoped lang="scss">
-
-
 .footer {
-  // ─── CTA Band ───────────────────────────────────────────
+
+  // ─── CTA Band ─────────────────────────────────────────
   &__cta-band {
-    background: $gradient-hero;
-    padding-block: $spacing-16;
-    border-top: 1px solid rgba($color-white, 0.06);
+    background:    $gradient-hero;
+    padding-block: $spacing-10;
+    border-top:    1px solid rgba($color-white, 0.06);
 
     @include respond-to(md) {
-      padding-block: $spacing-20;
+      padding-block: $spacing-16;
     }
   }
 
@@ -181,7 +183,7 @@ function scrollTo(href: string) {
     @include flex-col;
     align-items: center;
     text-align:  center;
-    gap:         $spacing-8;
+    gap:         $spacing-6;
 
     @include respond-to(md) {
       flex-direction:  row;
@@ -192,48 +194,50 @@ function scrollTo(href: string) {
 
   &__cta-text {
     @include flex-col;
-    gap: $spacing-3;
+    gap: $spacing-2;
   }
 
   &__cta-title {
-    @include heading-2;
-    color: $color-white;
+    font-family:  $font-heading;
+    font-size:    clamp(1.3rem, 5vw, 2rem);
+    font-weight:  $font-weight-extrabold;
+    color:        $color-white;
+    line-height:  $line-height-tight;
 
-    span {
-      color: $color-accent;
-    }
+    span { color: $color-accent; }
   }
 
   &__cta-subtitle {
-    @include body-text;
-    color: rgba($color-white, 0.65);
+    font-family: $font-body;
+    font-size:   $font-size-sm;
+    color:       rgba($color-white, 0.65);
   }
 
-  // ─── Main ───────────────────────────────────────────────
+  // ─── Main ─────────────────────────────────────────────
   &__main {
     background:    $color-primary;
-    padding-block: $spacing-16;
-  }
-
-  &__grid {
-    display:   grid;
-    gap:       $spacing-10;
-    grid-template-columns: 1fr;
+    padding-block: $spacing-10;
 
     @include respond-to(md) {
-      grid-template-columns: 1fr 1fr;
+      padding-block: $spacing-16;
     }
+  }
+
+  // Grid mobile: brand em cima, cols em baixo
+  &__grid {
+    display: grid;
+    gap:     $spacing-8;
 
     @include respond-to(lg) {
-      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1.5fr;
       gap: $spacing-16;
     }
   }
 
-  // ─── Brand ──────────────────────────────────────────────
+  // ─── Brand ────────────────────────────────────────────
   &__brand {
     @include flex-col;
-    gap: $spacing-5;
+    gap: $spacing-4;
   }
 
   &__logo {
@@ -248,14 +252,14 @@ function scrollTo(href: string) {
   }
 
   &__logo-icon {
-    font-size: 1.8rem;
-    filter: drop-shadow(0 0 8px rgba($color-accent, 0.5));
+    font-size: 1.6rem;
+    filter:    drop-shadow(0 0 8px rgba($color-accent, 0.5));
   }
 
   &__logo-name {
     display:        block;
     font-family:    $font-heading;
-    font-size:      $font-size-lg;
+    font-size:      $font-size-base;
     font-weight:    $font-weight-extrabold;
     color:          $color-white;
     letter-spacing: -0.01em;
@@ -274,9 +278,13 @@ function scrollTo(href: string) {
   &__brand-bio {
     font-family: $font-body;
     font-size:   $font-size-sm;
-    color:       rgba($color-white, 0.55);
+    color:       rgba($color-white, 0.5);
     line-height: $line-height-loose;
-    max-width:   300px;
+    max-width:   320px;
+
+    @include mobile-only {
+      font-size: $font-size-xs;
+    }
   }
 
   &__socials {
@@ -285,16 +293,15 @@ function scrollTo(href: string) {
   }
 
   &__social {
-    width:         40px;
-    height:        40px;
+    width:         38px;
+    height:        38px;
     border-radius: $radius-md;
     background:    rgba($color-white, 0.06);
     border:        1px solid rgba($color-white, 0.08);
     @include flex-center;
-    font-size:     1.2rem;
+    font-size:     1.1rem;
     transition:    $transition-base;
     text-decoration: none;
-    cursor:        pointer;
 
     &:hover {
       background:   $color-accent;
@@ -304,17 +311,32 @@ function scrollTo(href: string) {
     }
   }
 
-  // ─── Nav ────────────────────────────────────────────────
-  &__nav-title {
+  // ─── Cols (Nav + Contacto lado a lado no mobile) ───────
+  &__cols {
+    display: grid;
+    gap:     $spacing-6;
+
+    // Side-by-side no mobile
+    grid-template-columns: 1fr 1fr;
+
+    @include respond-to(lg) {
+      grid-template-columns: 1fr 1fr;
+      gap: $spacing-8;
+    }
+  }
+
+  // ─── Títulos das colunas ──────────────────────────────
+  &__col-title {
     font-family:    $font-heading;
     font-size:      $font-size-xs;
     font-weight:    $font-weight-bold;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color:          $color-accent;
-    margin-bottom:  $spacing-4;
+    margin-bottom:  $spacing-3;
   }
 
+  // ─── Nav ──────────────────────────────────────────────
   &__nav-list {
     @include flex-col;
     gap: $spacing-2;
@@ -322,35 +344,25 @@ function scrollTo(href: string) {
 
   &__nav-link {
     font-family:     $font-body;
-    font-size:       $font-size-sm;
-    color:           rgba($color-white, 0.55);
+    font-size:       $font-size-xs;
+    color:           rgba($color-white, 0.5);
     text-decoration: none;
     transition:      $transition-base;
     display:         flex;
     align-items:     center;
-    gap:             $spacing-2;
+    gap:             $spacing-1;
 
-    &::before {
-      content:    '→';
-      opacity:    0;
-      transform:  translateX(-6px);
-      transition: $transition-base;
-      color:      $color-accent;
-      font-size:  $font-size-xs;
+    @include respond-to(md) {
+      font-size: $font-size-sm;
     }
 
     &:hover {
-      color:       $color-white;
+      color:        $color-white;
       padding-left: $spacing-1;
-
-      &::before {
-        opacity:   1;
-        transform: translateX(0);
-      }
     }
   }
 
-  // ─── Contacto ───────────────────────────────────────────
+  // ─── Contacto ─────────────────────────────────────────
   &__contact-list {
     @include flex-col;
     gap: $spacing-3;
@@ -358,41 +370,50 @@ function scrollTo(href: string) {
 
   &__contact-item {
     display:     flex;
-    align-items: center;
-    gap:         $spacing-3;
+    align-items: flex-start;
+    gap:         $spacing-2;
     font-family: $font-body;
-    font-size:   $font-size-sm;
-    color:       rgba($color-white, 0.55);
-  }
+    font-size:   $font-size-xs;
+    color:       rgba($color-white, 0.5);
+    line-height: $line-height-normal;
 
-  &__contact-link {
-    color:           rgba($color-white, 0.55);
-    text-decoration: none;
-    transition:      $transition-base;
-
-    &:hover {
-      color: $color-white;
+    @include respond-to(md) {
+      font-size: $font-size-sm;
     }
   }
 
-  // ─── Bottom ─────────────────────────────────────────────
+  &__contact-link {
+    color:           rgba($color-white, 0.5);
+    text-decoration: none;
+    transition:      $transition-base;
+    word-break:      break-all; // evita overflow em emails
+
+    &:hover { color: $color-white; }
+  }
+
+  // ─── Bottom ───────────────────────────────────────────
   &__bottom {
-    background:  color.adjust($color-primary, $lightness: -3%);
-    padding-block: $spacing-5;
-    border-top:  1px solid rgba($color-white, 0.05);
+    background:    color.adjust($color-primary, $lightness: -3%);
+    padding-block: $spacing-4;
+    border-top:    1px solid rgba($color-white, 0.05);
+
+    // Espaço extra para a BottomNav no mobile
+    @include mobile-only {
+      padding-bottom: calc(#{$spacing-4} + 60px + env(safe-area-inset-bottom));
+    }
   }
 
   &__bottom-inner {
     @include flex-between;
     flex-wrap: wrap;
-    gap:       $spacing-3;
+    gap:       $spacing-2;
   }
 
   &__copyright,
   &__made {
     font-family: $font-body;
     font-size:   $font-size-xs;
-    color:       rgba($color-white, 0.35);
+    color:       rgba($color-white, 0.3);
   }
 
   &__made span {
