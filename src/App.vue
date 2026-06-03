@@ -21,7 +21,7 @@ import ScrollProgressBar        from '@/components/ui/ScrollProgressBar.vue'
 import BottomNav                from '@/components/layout/BottomNav.vue'
 import SchemaOrg                from '@/components/SchemaOrg.vue'
 
-const CALENDLY_URL = 'https://calendly.com/pedro-morilhas/consulta-gratuita'
+const CALENDLY_URL = 'https://calendly.com/pedromorilhas'
 const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdglTv_PWKJq7j1Y-aRTQ6IaoHbKX1t70DggsIgQAfuxCuRNA/viewform?usp=header'
 
 const SECTION_IDS = [
