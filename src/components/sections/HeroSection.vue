@@ -17,9 +17,7 @@ const isLoaded  = ref(false)
 // Parallax subtil no scroll
 const parallaxY = ref(0)
 
-const { buildUrl } = useWhatsApp()
-
-const MSG_HERO = 'Olá Pedro! Gostava de saber mais sobre o teu trabalho.'
+const {} = useWhatsApp()
 
 function handleScroll() {
   parallaxY.value = window.scrollY * 0.35

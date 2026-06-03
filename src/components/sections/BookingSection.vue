@@ -10,7 +10,7 @@ interface Props {
 
 const props = defineProps<Props>()
 
-const { el, isVisible } = useScrollReveal({ threshold: 0.1 })
+const { isVisible } = useScrollReveal({ threshold: 0.1 })
 
 // Acordeão mobile — qual step está expandido
 const openStep = ref<number | null>(null)
